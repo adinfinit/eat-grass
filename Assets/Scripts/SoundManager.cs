@@ -95,5 +95,4 @@ public class SoundManager : MonoBehaviour
         EventManager.StartListening("Thunder", () => PlaySound(SoundEffect.Thunder));
         EventManager.StartListening("Birds", () => PlaySound(SoundEffect.Birds));
     }
-    
 }
