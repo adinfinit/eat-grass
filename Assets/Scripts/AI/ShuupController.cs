@@ -9,40 +9,60 @@ public class ShuupController : MonoBehaviour
     public float wanderSpeed = 0.5f;
     public bool trigger;
     public Vector3 randomDirection;
+    public float attackDistance = 2.0f;
     private Rigidbody rb;
     private SphereCollider triggerCollider;
     private float newDirectionCountdown = 0.0f;
     private bool randomStanding = false;
     private Vector3 chargePosition; 
+    public enum State { Wandering, Aggressive, Charging, Attacking};
+    public State currentState;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
+        currentState = State.Wandering;
+
         rb = gameObject.GetComponent<Rigidbody>();
 
         triggerCollider = gameObject.GetComponent<SphereCollider>();
 
         if((player.transform.position - transform.position).magnitude < triggerCollider.radius)
         {
-            trigger = true;
+            currentState = State.Aggressive;
         }
-        else { trigger = false; }
     }
 
     // Update is called once per frame
     void Update() {
-        if (trigger)
+        if (currentState == State.Aggressive)
         {
 
             chargePosition = player.transform.position;
+            currentState = State.Charging;
+
+        }
+        if (currentState == State.Charging)
+        {
 
             Vector3 chargeDirection = (chargePosition - transform.position).normalized;
 
-            Debug.Log(chargeDirection);
 
             rb.velocity = chargeDirection * speed;
+
+            if(chargePosition == transform.position 
+                & (player.transform.position - transform.position).magnitude > attackDistance)
+            {
+                currentState = State.Aggressive;
+            }
+            if((player.transform.position - transform.position).magnitude <= attackDistance)
+            {
+                currentState = State.Attacking;
+            }
         }
-        else
+
+        if (currentState == State.Wandering)
         {   
             if (newDirectionCountdown <= 0.0f)
             {
@@ -58,21 +78,32 @@ public class ShuupController : MonoBehaviour
             newDirectionCountdown -= 1.0f ;
 
         }
-
+        if (currentState == State.Attacking)
+        {
+            if ((player.transform.position - transform.position).magnitude > attackDistance 
+            & (player.transform.position - transform.position).magnitude < triggerCollider.radius)
+            {
+                currentState = State.Aggressive;
+            }
+            if ((player.transform.position - transform.position).magnitude >= triggerCollider.radius)
+            {
+                currentState = State.Wandering;
+            }
+        }
 
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == player) {
-            trigger = true;
+            currentState = State.Aggressive;
         }
     }
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject == player)
         {
-            trigger = false;
+            currentState = State.Wandering;
         }
     }
 }
