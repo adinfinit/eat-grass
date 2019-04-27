@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShuupController : MonoBehaviour
 {
+    public GameObject[] bloodPrefabs;
+
     public GameObject player;
     public float speed = 2.0f;
     public float attackDistance = 2.0f;
@@ -115,11 +117,18 @@ public class ShuupController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
-        if (collision.gameObject.tag == "Weapon")
+        if (other.gameObject.tag == "Weapon")
         {
             EventManager.TriggerEvent("SheepBaa");
+            Instantiate(SelectRandomBloodPrefab(), this.transform.position, Quaternion.LookRotation(other.contacts[0].normal) );
         }
+    }
+
+    private GameObject SelectRandomBloodPrefab( )
+    {
+        int index = Random.Range(0, bloodPrefabs.Length - 1);
+        return bloodPrefabs[index];
     }
 }

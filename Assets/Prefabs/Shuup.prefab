@@ -119,12 +119,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a535f442972c48d1bc9c065d88876db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodPrefabs:
+  - {fileID: 1894583370191010, guid: 56d0de1fd5e9b441884172062ef37021, type: 3}
+  - {fileID: 1894583370191010, guid: 80436a3cdb59b4470988d1a6b6b6db7f, type: 3}
+  - {fileID: 1894583370191010, guid: a53837ac23a8a409cb09c052ac36426c, type: 3}
+  - {fileID: 1894583370191010, guid: 490c1a7b861c84056a86757b49dcbc2c, type: 3}
+  - {fileID: 1894583370191010, guid: e01b5c36d9de4483b958e4c292c3b9b5, type: 3}
+  - {fileID: 1894583370191010, guid: 481eb802ba5644cc588d511d6d646d6d, type: 3}
+  - {fileID: 1894583370191010, guid: 23f83fd615c3a46e9bf87428998c974a, type: 3}
+  - {fileID: 1894583370191010, guid: 6faa00504514541d8a2cae4e28b909ce, type: 3}
+  - {fileID: 1894583370191010, guid: da231e9cabee74aea8dea0f4024f45ff, type: 3}
+  - {fileID: 1894583370191010, guid: 3fc807a43fa9b4db99eed46e91709d80, type: 3}
+  - {fileID: 1894583370191010, guid: 6336fa0c1fd4c49fd98b621e6b4915c0, type: 3}
+  - {fileID: 1894583370191010, guid: 33741f14f067547069b41c05f99cf1d0, type: 3}
+  - {fileID: 1894583370191010, guid: cf12877cf55e4474b92977b23613b7a1, type: 3}
+  - {fileID: 1894583370191010, guid: 9f66a7960bf164f1ea070d6ec1a6b319, type: 3}
+  - {fileID: 1894583370191010, guid: 402bc378b4f91480885e9deb3fcf2770, type: 3}
+  - {fileID: 1894583370191010, guid: 95635247a18f74d89a8c0528ab5ba7a2, type: 3}
+  - {fileID: 1894583370191010, guid: 3d5dc12013051459683b5f3e5e42e483, type: 3}
+  - {fileID: 1894583370191010, guid: addd7fc00e4c246e1bfa1399d513a402, type: 3}
+  - {fileID: 1894583370191010, guid: 2f4b0e5b4ad1a42a4b44218b2da7885c, type: 3}
+  - {fileID: 1894583370191010, guid: 03021ac267e2d42bcaac73a3a2cf18c8, type: 3}
+  - {fileID: 1894583370191010, guid: 5872d646cdfaf4275bd7a290d8e5258f, type: 3}
+  - {fileID: 1894583370191010, guid: 049467c32bc314605a337d439d20983c, type: 3}
+  - {fileID: 1894583370191010, guid: 171d9e204094d42788497c6ecc5b589f, type: 3}
+  - {fileID: 1894583370191010, guid: e9d6cdb7d04ae460c9245276c4503488, type: 3}
+  - {fileID: 1894583370191010, guid: 9f6ffae857eb84d57855d703cd8b64f4, type: 3}
+  - {fileID: 1894583370191010, guid: bf6f7bef07d284af98e72f0a65dbb301, type: 3}
+  - {fileID: 1894583370191010, guid: d83080e2fbfd3422db82cd85ee93ee88, type: 3}
+  - {fileID: 1894583370191010, guid: e3bbdbeec3d254db9b5295d71cb1562d, type: 3}
+  - {fileID: 1894583370191010, guid: 305d5f0cbedbe4454bd511425ae4856b, type: 3}
+  - {fileID: 1894583370191010, guid: 2b95eb45f57004956ac1148d5f4f8cb8, type: 3}
   player: {fileID: 5277244809011926519, guid: d832d2c17ae1dd1fa8048be3c98297e5, type: 3}
   speed: 4
-  wanderSpeed: 1
-  trigger: 0
-  randomDirection: {x: 0, y: 0, z: 0}
   attackDistance: 2
+  wanderSpeed: 1
+  wanderingMinDuration: 100
+  wanderingMaxDuration: 150
   currentState: 0
 --- !u!54 &6566744317603817837
 Rigidbody:
