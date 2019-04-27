@@ -38,7 +38,7 @@ public class ShuupController : MonoBehaviour
     void Update() {
         if (currentState == State.Aggressive)
         {
-
+            Debug.Log("Aggressive");
             chargePosition = player.transform.position;
             currentState = State.Charging;
 
@@ -51,7 +51,7 @@ public class ShuupController : MonoBehaviour
 
             rb.velocity = chargeDirection * speed;
 
-            if(chargePosition == transform.position 
+            if((chargePosition - transform.position).magnitude < 0.15f
                 & (player.transform.position - transform.position).magnitude > attackDistance)
             {
                 currentState = State.Aggressive;
