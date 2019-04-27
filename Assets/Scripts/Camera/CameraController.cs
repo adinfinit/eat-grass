@@ -11,8 +11,8 @@ public class CameraController : MonoBehaviour
     public float smoothTime = 0.3F;
     private Vector3 velocity = Vector3.zero;
 
-    const float pitch = 20;
-    const float yaw = 45;
+    public const float Pitch = 20;
+    public const float Yaw = 45;
 
     void Start()
     {
@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
     {
         if (target == null) return;
 
-        var offset = Quaternion.Euler(pitch, yaw, 0) * new Vector3(0, 0, distance);
+        var offset = Quaternion.Euler(Pitch, Yaw, 0) * new Vector3(0, 0, distance);
         var targetPosition = target.transform.position - offset;
 
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
