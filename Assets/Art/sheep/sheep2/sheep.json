@@ -1,0 +1,32 @@
+{ "skeleton": { "images": "~/Desktop/ld44/sheep2/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "Layer 3", "bone": "root", "attachment": "Layer 3" },
+	{ "name": "Layer 2 copy", "bone": "root", "attachment": "Layer 2 copy" },
+	{ "name": "Layer 9", "bone": "root", "attachment": "Layer 9" },
+	{ "name": "Layer 11", "bone": "root", "attachment": "Layer 11" },
+	{ "name": "Layer 4 copy", "bone": "root", "attachment": "Layer 4 copy" }
+],
+"skins": {
+	"default": {
+		"Layer 3": {
+			"Layer 3": { "x": 2451, "y": -2877, "width": 102, "height": 276 }
+		},
+		"Layer 2 copy": {
+			"Layer 2 copy": { "x": 1831, "y": -2199, "width": 976, "height": 816 }
+		},
+		"Layer 9": {
+			"Layer 9": { "x": 2334.5, "y": -2511, "width": 205, "height": 140 }
+		},
+		"Layer 11": {
+			"Layer 11": { "x": 2321, "y": -2480.5, "width": 206, "height": 89 }
+		},
+		"Layer 4 copy": {
+			"Layer 4 copy": { "x": 2240.5, "y": -2336.5, "width": 373, "height": 295 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}
