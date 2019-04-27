@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+    public float attackSpeed = 2f;
     private float targetRotation;
     private float attackTimer;
 
@@ -16,7 +17,7 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        attackTimer += 10 * Time.deltaTime;
+        attackTimer += attackSpeed * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0, Mathf.Lerp(0, targetRotation, attackTimer), 0);
     }
 
