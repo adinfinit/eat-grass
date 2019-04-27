@@ -114,4 +114,12 @@ public class ShuupController : MonoBehaviour
             currentState = State.Wandering;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Weapon")
+        {
+            EventManager.TriggerEvent("SheepBaa");
+        }
+    }
 }
