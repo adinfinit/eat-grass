@@ -9,19 +9,21 @@ public class WeaponController : MonoBehaviour
     private float attackTimer;
 
     private Animator anim;
+    private Component sword;
 
     // Start is called before the first frame update
     void Start()
     {
         targetRotation = transform.localEulerAngles.y;
         anim = GetComponentInChildren<Animator>();
+        sword = GetComponentInChildren<WeaponPivot>();
     }
 
     // Update is called once per frame
     void Update()
     {
         attackTimer += attackSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.Euler(0, Mathf.Lerp(0, targetRotation, attackTimer), 0);
+        sword.transform.rotation = Quaternion.Euler(0, Mathf.Lerp(0, targetRotation, attackTimer), 0);
     }
 
     public void StartAttack()

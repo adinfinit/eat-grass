@@ -25,6 +25,7 @@ public class ShuupController : MonoBehaviour
     private bool randomStanding = false;
     private Vector3 chargePosition;
     private float knockBackTime = -1.0f;
+    private Animator anim;
     
 
     // Start is called before the first frame update
@@ -41,6 +42,8 @@ public class ShuupController : MonoBehaviour
         {
             currentState = State.Aggressive;
         }
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -63,7 +66,8 @@ public class ShuupController : MonoBehaviour
         }
         else if (currentState == State.Charging)
         {
-
+            anim.SetBool("Running", true);
+            anim.SetFloat("Speed", 3f);
             Vector3 chargeDirection = (chargePosition - transform.position).normalized;
 
 
@@ -77,6 +81,7 @@ public class ShuupController : MonoBehaviour
             if ((player.transform.position - transform.position).magnitude <= attackDistance)
             {
                 currentState = State.Attacking;
+                anim.SetTrigger("Attack");
             }
         }
 
@@ -93,7 +98,14 @@ public class ShuupController : MonoBehaviour
             }
             if (randomStanding == false)
             {
+                anim.SetBool("Running", true);
+                anim.SetFloat("Speed", 0.5f);
                 rb.MovePosition(transform.position + randomDirection * wanderSpeed * Time.deltaTime);
+            }
+            else 
+            {
+                anim.SetBool("Running", false);
+                anim.SetFloat("Speed", 0.5f);
             }
 
             newDirectionCountdown -= 1.0f;

@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
         if (DoubleTap()) {
             currentlyDashing = true;
             print("DASH!");
-
         }
 
         float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -59,6 +58,9 @@ public class PlayerController : MonoBehaviour
                 wc.StartAttack();
             }
         }
+
+        // constrain elevation
+        transform.position = new Vector3 (transform.position.x, 1f, transform.position.z);
     }
 
     bool DoubleTap() {
