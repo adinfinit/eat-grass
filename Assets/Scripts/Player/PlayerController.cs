@@ -19,6 +19,11 @@ public class PlayerController : MonoBehaviour
     private Quaternion cameraDirection;
     private Component[] weaponControllers;
 
+    public float MaxHealth = 200f;
+    public float CurrentHealth = 200f;
+    public float InvulnerableTime = 0.5f;  // time between taking damage
+    private float InvulnerableTimer= 0f;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -61,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
         // constrain elevation
         transform.position = new Vector3 (transform.position.x, 1f, transform.position.z);
+        InvulnerableTimer += Time.deltaTime;
     }
 
     bool DoubleTap() {
@@ -114,6 +120,15 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void getAttacked() {
+        print("Got hit!");
+        if (InvulnerableTimer > InvulnerableTime) {
+            InvulnerableTimer = 0f;
+            CurrentHealth -= 40;
+            print("Health left " + CurrentHealth);
+        }
     }
 
 }

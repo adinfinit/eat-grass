@@ -26,6 +26,7 @@ public class ShuupController : MonoBehaviour
     private Vector3 chargePosition;
     private float knockBackTime = -1.0f;
     private Animator anim;
+    private ShoopAttack shoopAttack;
     
 
     // Start is called before the first frame update
@@ -35,6 +36,7 @@ public class ShuupController : MonoBehaviour
         currentState = State.Wandering;
 
         rb = gameObject.GetComponent<Rigidbody>();
+        shoopAttack = gameObject.GetComponentInChildren<ShoopAttack>();
 
         triggerCollider = gameObject.GetComponent<SphereCollider>();
 
@@ -82,6 +84,7 @@ public class ShuupController : MonoBehaviour
             {
                 currentState = State.Attacking;
                 anim.SetTrigger("Attack");
+                shoopAttack.Attack();
             }
         }
 

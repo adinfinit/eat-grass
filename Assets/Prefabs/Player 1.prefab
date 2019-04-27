@@ -580,3 +580,6 @@ MonoBehaviour:
   dashMultiplier: 2
   dashDuration: 0.1
   doubleTapCooldown: 0.3
+  MaxHealth: 200
+  CurrentHealth: 200
+  InvulnerableTime: 0.5
