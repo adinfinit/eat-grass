@@ -1,0 +1,41 @@
+
+sheep.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 11
+  rotate: false
+  xy: 1355, 833
+  size: 206, 89
+  orig: 206, 89
+  offset: 0, 0
+  index: -1
+Layer 2 copy
+  rotate: false
+  xy: 2, 106
+  size: 976, 816
+  orig: 976, 816
+  offset: 0, 0
+  index: -1
+Layer 3
+  rotate: true
+  xy: 2, 2
+  size: 102, 276
+  orig: 102, 276
+  offset: 0, 0
+  index: -1
+Layer 4 copy
+  rotate: false
+  xy: 980, 627
+  size: 373, 295
+  orig: 373, 295
+  offset: 0, 0
+  index: -1
+Layer 9
+  rotate: false
+  xy: 980, 485
+  size: 205, 140
+  orig: 205, 140
+  offset: 0, 0
+  index: -1
