@@ -1,0 +1,96 @@
+
+character.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Head back
+  rotate: false
+  xy: 1208, 1194
+  size: 680, 840
+  orig: 680, 840
+  offset: 0, 0
+  index: -1
+Head front
+  rotate: false
+  xy: 1208, 1194
+  size: 680, 840
+  orig: 680, 840
+  offset: 0, 0
+  index: -1
+Layer 23
+  rotate: true
+  xy: 2, 256
+  size: 243, 154
+  orig: 243, 154
+  offset: 0, 0
+  index: -1
+body back
+  rotate: false
+  xy: 2, 501
+  size: 601, 1533
+  orig: 601, 1533
+  offset: 0, 0
+  index: -1
+body front
+  rotate: false
+  xy: 605, 514
+  size: 601, 1520
+  orig: 601, 1520
+  offset: 0, 0
+  index: -1
+happy ete
+  rotate: true
+  xy: 154, 45
+  size: 209, 98
+  orig: 209, 98
+  offset: 0, 0
+  index: -1
+hat back
+  rotate: false
+  xy: 605, 2
+  size: 1017, 510
+  orig: 1017, 510
+  offset: 0, 0
+  index: -1
+mouth closed
+  rotate: true
+  xy: 254, 167
+  size: 98, 69
+  orig: 98, 69
+  offset: 0, 0
+  index: -1
+mouth open
+  rotate: true
+  xy: 158, 267
+  size: 110, 108
+  orig: 110, 108
+  offset: 0, 0
+  index: -1
+neck back
+  rotate: true
+  xy: 2, 37
+  size: 217, 150
+  orig: 217, 150
+  offset: 0, 0
+  index: -1
+open eye
+  rotate: false
+  xy: 158, 379
+  size: 117, 120
+  orig: 117, 120
+  offset: 0, 0
+  index: -1
+
+character2.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Hat front
+  rotate: false
+  xy: 2, 2
+  size: 1014, 510
+  orig: 1014, 510
+  offset: 0, 0
+  index: -1
