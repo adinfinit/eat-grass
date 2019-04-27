@@ -20,6 +20,7 @@
             "RenderType"="Transparent"
             "PreviewType"="Plane"
             "CanUseSpriteAtlas"="True"
+            "DisableBatching"="True"
         }
 
         Cull Off
@@ -41,14 +42,22 @@
             v2f BillboardVert(appdata_t IN)
             {
                 v2f OUT;
-
-                UNITY_SETUP_INSTANCE_ID (IN);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
                 OUT.vertex = UnityFlipSprite(IN.vertex, _Flip);
-                OUT.vertex.xyz = UnityObjectToViewPos(OUT.vertex.xyz);
-                OUT.vertex = mul(UNITY_MATRIX_P, OUT.vertex);
 
+                float4x4 mv = UNITY_MATRIX_MV;
+                mv._m00 = length(float3(unity_ObjectToWorld[0].x, unity_ObjectToWorld[1].x, unity_ObjectToWorld[2].x));
+                mv._m10 = 0.0f; 
+                mv._m20 = 0.0f; 
+                mv._m01 = 0.0f;
+                mv._m11 = length(float3(unity_ObjectToWorld[0].y, unity_ObjectToWorld[1].y, unity_ObjectToWorld[2].y));
+                mv._m21 = 0.0f;
+                mv._m02 = 0.0f; 
+                mv._m12 = 0.0f; 
+                mv._m22 = length(float3(unity_ObjectToWorld[0].z, unity_ObjectToWorld[1].z, unity_ObjectToWorld[2].z));
+
+                OUT.vertex = mul(UNITY_MATRIX_P, mul(mv, OUT.vertex));
                 OUT.texcoord = IN.texcoord;
                 OUT.color = IN.color * _Color * _RendererColor;
 
