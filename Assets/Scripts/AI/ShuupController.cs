@@ -8,12 +8,14 @@ public class ShuupController : MonoBehaviour
 
     public GameObject player;
     public float speed = 2.0f;
+    public float knockbackSpeed = 3.0f;
     public float attackDistance = 2.0f;
+    public float health = 100.0f;
 
     public float wanderSpeed = 0.5f;
     public float wanderingMinDuration = 100.0f;
     public float wanderingMaxDuration = 150.0f;
-    public enum State { Wandering, Aggressive, Charging, Attacking };
+    public enum State { Wandering, Aggressive, Charging, Attacking, Knockback};
     public State currentState;
 
     private Vector3 randomDirection;
@@ -21,7 +23,9 @@ public class ShuupController : MonoBehaviour
     private SphereCollider triggerCollider;
     private float newDirectionCountdown = 0.0f;
     private bool randomStanding = false;
-    private Vector3 chargePosition; 
+    private Vector3 chargePosition;
+    private float knockBackTime = -1.0f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +44,14 @@ public class ShuupController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
+
+        if (health <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+
         if (currentState == State.Aggressive)
         {
             chargePosition = player.transform.position;
@@ -50,7 +61,7 @@ public class ShuupController : MonoBehaviour
             rb.MoveRotation(Quaternion.LookRotation(chargeDirection));
 
         }
-        if (currentState == State.Charging)
+        else if (currentState == State.Charging)
         {
 
             Vector3 chargeDirection = (chargePosition - transform.position).normalized;
@@ -63,14 +74,14 @@ public class ShuupController : MonoBehaviour
             {
                 currentState = State.Aggressive;
             }
-            if((player.transform.position - transform.position).magnitude <= attackDistance)
+            if ((player.transform.position - transform.position).magnitude <= attackDistance)
             {
                 currentState = State.Attacking;
             }
         }
 
-        if (currentState == State.Wandering)
-        {   
+        else if (currentState == State.Wandering)
+        {
             if (newDirectionCountdown <= 0.0f)
             {
                 randomDirection = (new Vector3(Random.Range(-1.0f, 1.0f), 0.0f, Random.Range(-1.0f, 1.0f))).normalized;
@@ -85,12 +96,12 @@ public class ShuupController : MonoBehaviour
                 rb.MovePosition(transform.position + randomDirection * wanderSpeed * Time.deltaTime);
             }
 
-            newDirectionCountdown -= 1.0f ;
+            newDirectionCountdown -= 1.0f;
 
         }
-        if (currentState == State.Attacking)
+        else if (currentState == State.Attacking)
         {
-            if ((player.transform.position - transform.position).magnitude > attackDistance 
+            if ((player.transform.position - transform.position).magnitude > attackDistance
             & (player.transform.position - transform.position).magnitude < triggerCollider.radius)
             {
                 currentState = State.Aggressive;
@@ -100,7 +111,14 @@ public class ShuupController : MonoBehaviour
                 currentState = State.Wandering;
             }
         }
+        else if (currentState == State.Knockback)
+        {
+            if (Time.time - knockBackTime > 0.5f)
+            {
+                currentState = State.Wandering;
+            }
 
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -117,16 +135,29 @@ public class ShuupController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.tag == "Weapon")
         {
-            EventManager.TriggerEvent("SheepBaa");
-            Instantiate(SelectRandomBloodPrefab(), this.transform.position, Quaternion.LookRotation(other.contacts[0].normal) );
+
+            if (Time.time - knockBackTime > 0.1f)
+            {
+                EventManager.TriggerEvent("SheepBaa");
+                Instantiate(SelectRandomBloodPrefab(), this.transform.position, Quaternion.LookRotation(other.contacts[0].normal));
+                Vector3 velocityChange = -(player.transform.position - transform.position) ;
+                rb.MovePosition(transform.position + velocityChange * 1.0f);
+
+                velocityChange.y = 0.0f;
+                rb.velocity = velocityChange * knockbackSpeed ;
+                knockBackTime = Time.time;
+                currentState = State.Knockback;
+
+                this.health -= other.gameObject.GetComponent<WeaponInfo>().damage;
+            }       
         }
     }
 
-    private GameObject SelectRandomBloodPrefab( )
+    GameObject SelectRandomBloodPrefab( )
     {
         int index = Random.Range(0, bloodPrefabs.Length - 1);
         return bloodPrefabs[index];

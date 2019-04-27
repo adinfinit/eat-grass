@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f9ae350a15402e7fa2670b6dd0e48d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSpeed: 2
 --- !u!1 &5277244809011926519
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,6 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  dashMultiplier: 3
+  dashDuration: 0.1
+  doubleTapCooldown: 0.3
 --- !u!1 &5277244809529250379
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,9 +171,10 @@ GameObject:
   - component: {fileID: 5277244809529250391}
   - component: {fileID: 5277244809529250388}
   - component: {fileID: 5277244809529250389}
+  - component: {fileID: 899769595}
   m_Layer: 0
   m_Name: sword
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244,5 +249,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.19, y: 1.87, z: 1.83}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &899769595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5277244809529250379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3196d8767ea29dd4385064d4427a3e19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 30

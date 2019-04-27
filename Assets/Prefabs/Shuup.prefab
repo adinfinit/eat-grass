@@ -152,7 +152,9 @@ MonoBehaviour:
   - {fileID: 1894583370191010, guid: 2b95eb45f57004956ac1148d5f4f8cb8, type: 3}
   player: {fileID: 5277244809011926519, guid: d832d2c17ae1dd1fa8048be3c98297e5, type: 3}
   speed: 4
+  knockbackSpeed: 10
   attackDistance: 2
+  health: 100
   wanderSpeed: 1
   wanderingMinDuration: 100
   wanderingMaxDuration: 150
@@ -171,5 +173,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 116
   m_CollisionDetection: 0
