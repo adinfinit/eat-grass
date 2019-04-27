@@ -10,6 +10,8 @@ public class ShuupController : MonoBehaviour
     public bool trigger;
     public Vector3 randomDirection;
     public float attackDistance = 2.0f;
+    public float wanderingMinDuration = 100.0f;
+    public float wanderingMaxDuration = 150.0f;
     private Rigidbody rb;
     private SphereCollider triggerCollider;
     private float newDirectionCountdown = 0.0f;
@@ -38,9 +40,11 @@ public class ShuupController : MonoBehaviour
     void Update() {
         if (currentState == State.Aggressive)
         {
-            Debug.Log("Aggressive");
             chargePosition = player.transform.position;
+            Vector3 chargeDirection = (chargePosition - transform.position).normalized;
             currentState = State.Charging;
+
+            transform.rotation = Quaternion.LookRotation(chargeDirection);
 
         }
         if (currentState == State.Charging)
@@ -67,7 +71,9 @@ public class ShuupController : MonoBehaviour
             if (newDirectionCountdown <= 0.0f)
             {
                 randomDirection = (new Vector3(Random.Range(-1.0f, 1.0f), 0.0f, Random.Range(-1.0f, 1.0f))).normalized;
-                newDirectionCountdown = Random.Range(50.0f, 100.0f);
+                transform.rotation = Quaternion.LookRotation(randomDirection);
+
+                newDirectionCountdown = Random.Range(wanderingMinDuration, wanderingMaxDuration);
                 randomStanding = (Random.value > 0.5f);
             }
             if (randomStanding == false)
