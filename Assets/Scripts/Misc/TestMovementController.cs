@@ -7,6 +7,8 @@ public class TestMovementController : MonoBehaviour
     public float maxSpeed = 10.0f;
     public Vector3 direction = Vector3.zero;
 
+    public Terrain terrain;
+
     private Rigidbody rb;
 
     void Start()
@@ -22,17 +24,29 @@ public class TestMovementController : MonoBehaviour
         var dy = Input.GetAxis("Vertical");
 
         direction = new Vector3(dx, 0, dy);
+        direction = Quaternion.Euler(0, 45f, 0) * direction;
         if (direction.magnitude > 1.0f) direction.Normalize();
+
+        if (Input.GetButtonDown("Fire1")) {
+            var mower = terrain.GetComponent<GrassController>();
+            mower.Cut(transform.position, 5f);
+        }
+
+        if (Input.GetButtonDown("Fire2")) {
+            var mower = terrain.GetComponent<GrassController>();
+            mower.Plant(transform.position, 5f);
+        }
     }
 
     void FixedUpdate()
     {
-        // rb.AddForce(direction * maxSpeed);
-        rb.velocity = direction * maxSpeed;
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, transform.position + direction);
+        if (direction.magnitude > 0.05f)
+        {
+            var velocity = rb.velocity;
+            velocity.x = direction.x * maxSpeed;
+            velocity.z = direction.z * maxSpeed;
+            rb.velocity = velocity;
+        }
+        rb.velocity.Scale(new Vector3(0.9f, 1.0f, 0.9f));
     }
 }
