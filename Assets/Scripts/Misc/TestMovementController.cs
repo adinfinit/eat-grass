@@ -42,19 +42,21 @@ public class TestMovementController : MonoBehaviour
             // mower.Plant(transform.position, 5f);
             mower.Grow();
         }
-    }
 
-    void FixedUpdate()
-    {
         if (direction.magnitude > 0.05f)
         {
             rb.transform.rotation = Quaternion.LookRotation(direction);
 
-            var velocity = rb.velocity;
+            var velocity = new Vector3();
             velocity.x = direction.x * maxSpeed;
             velocity.z = direction.z * maxSpeed;
-            rb.velocity = velocity;
+            //rb.velocity = velocity;
+            rb.MovePosition(rb.transform.position + velocity * Time.deltaTime);
         }
-        rb.velocity.Scale(new Vector3(0.9f, 1.0f, 0.9f));
+    }
+
+    void FixedUpdate()
+    {
+
     }
 }
