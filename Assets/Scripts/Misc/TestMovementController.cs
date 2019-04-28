@@ -27,12 +27,15 @@ public class TestMovementController : MonoBehaviour
         direction = Quaternion.Euler(0, 45f, 0) * direction;
         if (direction.magnitude > 1.0f) direction.Normalize();
 
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1"))
+        {
             var mower = terrain.GetComponent<GrassController>();
-            mower.Cut(transform.position, 5f);
+            mower.Cut(transform.position, 6f);
+            mower.Cut(transform.position, 3f);
         }
 
-        if (Input.GetButtonDown("Fire2")) {
+        if (Input.GetButtonDown("Fire2"))
+        {
             var mower = terrain.GetComponent<GrassController>();
             mower.Plant(transform.position, 5f);
         }
