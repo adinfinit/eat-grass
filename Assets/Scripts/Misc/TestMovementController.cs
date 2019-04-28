@@ -37,7 +37,8 @@ public class TestMovementController : MonoBehaviour
         if (Input.GetButtonDown("Fire2"))
         {
             var mower = terrain.GetComponent<GrassController>();
-            mower.Plant(transform.position, 5f);
+            // mower.Plant(transform.position, 5f);
+            mower.Grow();
         }
     }
 

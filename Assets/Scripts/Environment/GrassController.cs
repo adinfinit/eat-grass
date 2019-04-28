@@ -1,16 +1,19 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GrassController : MonoBehaviour
 {
-    void Awake() {
+    void Awake()
+    {
         Reset();
     }
 
-    public void Reset() {
+    public void Reset()
+    {
         var terrain = GetComponent<Terrain>();
-        if(terrain == null) {
+        if (terrain == null)
+        {
             Debug.LogWarning("Terrain component missing.", gameObject);
             return;
         }
@@ -26,15 +29,45 @@ public class GrassController : MonoBehaviour
         data.SetDetailLayer(0, 0, 3, cut);
 
         // set fully grown grass
-        for(var h = 0; h < data.detailHeight; h++)
-            for(var w = 0; w < data.detailHeight; w++)
+        for (var h = 0; h < data.detailHeight; h++)
+            for (var w = 0; w < data.detailHeight; w++)
                 cut[w, h] = 1;
         data.SetDetailLayer(0, 0, 0, cut);
     }
 
-    public void Cut(Vector3 at, float radius) {
+    public void Grow()
+    {
         var terrain = GetComponent<Terrain>();
-        if(terrain == null) {
+        if (terrain == null)
+        {
+            Debug.LogWarning("Terrain component missing.", gameObject);
+            return;
+        }
+
+        var data = terrain.terrainData;
+
+        var cut0 = data.GetDetailLayer(0, 0, data.detailWidth, data.detailHeight, 0);
+        var cut1 = data.GetDetailLayer(0, 0, data.detailWidth, data.detailHeight, 1);
+        for (var h = 0; h < data.detailHeight; h++)
+            for (var w = 0; w < data.detailHeight; w++)
+                if (cut1[w, h] > 0)
+                    cut0[w, h] = 1;
+        data.SetDetailLayer(0, 0, 0, cut0);
+
+        var cut2 = data.GetDetailLayer(0, 0, data.detailWidth, data.detailHeight, 2);
+        data.SetDetailLayer(0, 0, 1, cut2);
+
+        var cut3 = data.GetDetailLayer(0, 0, data.detailWidth, data.detailHeight, 3);
+        data.SetDetailLayer(0, 0, 2, cut3);
+
+        data.SetDetailLayer(0, 0, 3, new int[data.detailWidth, data.detailHeight]);
+    }
+
+    public void Cut(Vector3 at, float radius)
+    {
+        var terrain = GetComponent<Terrain>();
+        if (terrain == null)
+        {
             Debug.LogWarning("Terrain component missing.", gameObject);
             return;
         }
@@ -52,7 +85,7 @@ public class GrassController : MonoBehaviour
         // radius in a particular dimension
         var wr = Mathf.Round(radius * detailScale.x);
         var hr = Mathf.Round(radius * detailScale.z);
-        
+
         // calculate rectangle bounds
         int w0 = (int)Mathf.Floor(center.x - wr);
         int w1 = (int)Mathf.Round(center.x);
@@ -96,7 +129,7 @@ public class GrassController : MonoBehaviour
             {
                 var dw = (w - w1) * wrinv;
                 // ignore everything outside of the circle
-                if(dh * dh + dw * dw > 1) continue;
+                if (dh * dh + dw * dw > 1) continue;
 
                 // cut the detail layer
                 if (cut2[w, h] > 0)
@@ -114,9 +147,11 @@ public class GrassController : MonoBehaviour
         data.SetDetailLayer(w0, h0, 3, cut3);
     }
 
-    public void Plant(Vector3 at, float radius) {
+    public void Plant(Vector3 at, float radius)
+    {
         var terrain = GetComponent<Terrain>();
-        if(terrain == null) {
+        if (terrain == null)
+        {
             Debug.LogWarning("Terrain component missing.", gameObject);
             return;
         }
@@ -134,7 +169,7 @@ public class GrassController : MonoBehaviour
         // radius in a particular dimension
         var wr = Mathf.Round(radius * detailScale.x);
         var hr = Mathf.Round(radius * detailScale.z);
-        
+
         // calculate rectangle bounds
         int w0 = (int)Mathf.Floor(center.x - wr);
         int w1 = (int)Mathf.Round(center.x);
@@ -178,13 +213,13 @@ public class GrassController : MonoBehaviour
             {
                 var dw = (w - w1) * wrinv;
                 // ignore everything outside of the circle
-                if(dh * dh + dw * dw > 1) continue;
+                if (dh * dh + dw * dw > 1) continue;
 
-                if(cut1[w,h] > 0)
+                if (cut1[w, h] > 0)
                     cut0[w, h] = 1;
-                cut1[w,h] = cut2[w, h];
-                cut2[w,h] = cut3[w, h];
-                cut3[w,h] = 0;
+                cut1[w, h] = cut2[w, h];
+                cut2[w, h] = cut3[w, h];
+                cut3[w, h] = 0;
             }
         }
 
