@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity;
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public float InvulnerableTime = 0.5f;  // time between taking damage
     private float InvulnerableTimer = 0f;
     private HealthBar healtbar;
+    private SkeletonAnimation skel;
 
     void Start()
     {
@@ -32,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
         weaponControllers = GetComponentsInChildren<WeaponController>();
         healtbar = GetComponentInChildren<HealthBar>();
+        skel = GetComponentInChildren<SkeletonAnimation>();
     }
 
     // Update is called once per frame
@@ -96,6 +99,8 @@ public class PlayerController : MonoBehaviour
         */
 
         // healtbar.transform.localScale = new Vector3(2 * (Mathf.Clamp(CurrentHealth, 0f, MaxHealth) / MaxHealth), 0.2f, 0f);
+
+        skel.Skeleton.ScaleX = (moveDirection.x < 0)  ? 1 : -1;
 
         // constrain elevation
         transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
