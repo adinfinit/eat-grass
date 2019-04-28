@@ -1,0 +1,27 @@
+
+sheep.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+sheep body
+  rotate: false
+  xy: 2, 93
+  size: 952, 778
+  orig: 952, 778
+  offset: 0, 0
+  index: -1
+sheep head 1
+  rotate: true
+  xy: 956, 422
+  size: 449, 895
+  orig: 449, 895
+  offset: 0, 0
+  index: -1
+sheep head 2
+  rotate: false
+  xy: 956, 2
+  size: 669, 418
+  orig: 669, 418
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,32 @@
+{ "skeleton": { "images": "~/Documents/GitHub/eat-grass/Assets/Art/new sheep/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "4_000x4_000_isometric_grid_by_dcofjapan_d9xe6em", "bone": "root", "attachment": "4_000x4_000_isometric_grid_by_dcofjapan_d9xe6em" },
+	{ "name": "sheep head 2", "bone": "root", "attachment": "sheep head 2" },
+	{ "name": "sheep leeg", "bone": "root", "attachment": "sheep leeg" },
+	{ "name": "sheep body", "bone": "root", "attachment": "sheep body" },
+	{ "name": "sheep head 1", "bone": "root", "attachment": "sheep head 1" }
+],
+"skins": {
+	"default": {
+		"4_000x4_000_isometric_grid_by_dcofjapan_d9xe6em": {
+			"4_000x4_000_isometric_grid_by_dcofjapan_d9xe6em": { "x": 809, "y": -738, "width": 1620, "height": 1478 }
+		},
+		"sheep head 2": {
+			"sheep head 2": { "x": 721.5, "y": -286, "width": 669, "height": 418 }
+		},
+		"sheep leeg": {
+			"sheep leeg": { "x": 673.5, "y": -1250, "width": 79, "height": 248 }
+		},
+		"sheep body": {
+			"sheep body": { "x": 1018, "y": -713, "width": 952, "height": 778 }
+		},
+		"sheep head 1": {
+			"sheep head 1": { "x": 436.5, "y": -1029.5, "width": 449, "height": 895 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}
