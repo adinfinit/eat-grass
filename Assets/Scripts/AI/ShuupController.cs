@@ -27,6 +27,7 @@ public class ShuupController : MonoBehaviour
     private float knockBackTime = -1.0f;
     private Animator anim;
     private ShoopAttack shoopAttack;
+    private HealthBar healthBar;
     
 
     // Start is called before the first frame update
@@ -46,6 +47,7 @@ public class ShuupController : MonoBehaviour
         }
 
         anim = GetComponentInChildren<Animator>();
+        healthBar = GetComponentInChildren<HealthBar>();
     }
 
     // Update is called once per frame
@@ -63,7 +65,7 @@ public class ShuupController : MonoBehaviour
             Vector3 chargeDirection = (chargePosition - transform.position).normalized;
             currentState = State.Charging;
 
-            rb.MoveRotation(Quaternion.LookRotation(chargeDirection));
+            rb.MoveRotation(Quaternion.LookRotation(new Vector3(chargeDirection.x, 0f, chargeDirection.z)));
 
         }
         else if (currentState == State.Charging)
@@ -134,6 +136,10 @@ public class ShuupController : MonoBehaviour
             }
 
         }
+
+
+        healthBar.transform.localScale = new Vector3(2 * (Mathf.Clamp(health, 0f, 100f) / 100f), 0.2f, 0f);
+        //transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
     }
 
     void OnTriggerEnter(Collider other)
