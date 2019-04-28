@@ -24,7 +24,7 @@ public class WeaponController : MonoBehaviour
     public GameObject grassConeSplatter;
 
     public AnimationCurve forwardSlashCurve;
-    public AnimationCurve areaSlashCurve; 
+    public AnimationCurve areaSlashCurve;
 
 
     public enum AttackType { None, ForwardSlash, AreaSlash };
@@ -70,7 +70,7 @@ public class WeaponController : MonoBehaviour
             case AttackType.ForwardSlash:
                 curveValue = forwardSlashCurve.Evaluate(attackTimer / attackSpeed);
                 weaponPivot.localRotation = Quaternion.Euler(0, -curveValue * targetRotation, 0);
-                
+
                 break;
 
             case AttackType.AreaSlash:
@@ -92,10 +92,10 @@ public class WeaponController : MonoBehaviour
         // Player forward;
         Vector3 direction = playerTransform.forward;
 
-        Terrain.activeTerrain.GetComponent<GrassController>().CutArc(transform.position, forwardSlashArcArea,
-            direction, forwardSlashArcAngle);
-        Terrain.activeTerrain.GetComponent<GrassController>().CutArc(transform.position, forwardSlashArcArea - 2.0f,
-            direction, forwardSlashArcAngle * 0.7f);
+        var grass = Terrain.activeTerrain.GetComponent<GrassController>();
+
+        grass.CutArc(transform.position, forwardSlashArcArea, direction, forwardSlashArcAngle);
+        grass.CutArc(transform.position, forwardSlashArcArea - 2.0f, direction, forwardSlashArcAngle * 0.7f);
 
         CreateParticleGameobject(grassConeSplatter, direction);
         attackType = AttackType.ForwardSlash;
@@ -108,12 +108,17 @@ public class WeaponController : MonoBehaviour
         attackStartTime = Time.time;
         targetRotation = 360f;
 
-        Terrain.activeTerrain.GetComponent<GrassController>().Cut(transform.position, areaSlashArcArea);
-        Terrain.activeTerrain.GetComponent<GrassController>().Cut(transform.position, areaSlashArcArea - 2);
-        Terrain.activeTerrain.GetComponent<GrassController>().Cut(transform.position, areaSlashArcArea - 4);
+        var grass = Terrain.activeTerrain.GetComponent<GrassController>();
+        var total = 0;
+        total += grass.CutCounted(transform.position, areaSlashArcArea);
+        total += grass.CutCounted(transform.position, areaSlashArcArea - 2);
+        total += grass.CutCounted(transform.position, areaSlashArcArea - 4);
+
+        if (WorldController.instance != null)
+            WorldController.instance.PlayerCut(total);
 
         CreateParticleGameobject(grassAreaSplatter, Vector3.left);
-        
+
         attackType = AttackType.AreaSlash;
     }
 
@@ -121,7 +126,7 @@ public class WeaponController : MonoBehaviour
     {
         if (vfx)
         {
-            GameObject _go_vfx = Instantiate(vfx, this.transform.position, 
+            GameObject _go_vfx = Instantiate(vfx, this.transform.position,
                 Quaternion.LookRotation(lookAt));
 
             _go_vfx.AddComponent<ParticleSystemAutoDestroy>();
