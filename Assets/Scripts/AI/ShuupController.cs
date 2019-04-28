@@ -15,7 +15,7 @@ public class ShuupController : MonoBehaviour
     public float wanderSpeed = 0.5f;
     public float wanderingMinDuration = 100.0f;
     public float wanderingMaxDuration = 150.0f;
-    public enum State { Wandering, Aggressive, Charging, Attacking, Knockback};
+    public enum State { Wandering, Aggressive, Charging, Attacking, Knockback };
     public State currentState;
 
     private Vector3 randomDirection;
@@ -28,7 +28,7 @@ public class ShuupController : MonoBehaviour
     private Animator anim;
     private ShoopAttack shoopAttack;
     private HealthBar healthBar;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,7 @@ public class ShuupController : MonoBehaviour
 
         triggerCollider = gameObject.GetComponent<SphereCollider>();
 
-        if((player.transform.position - transform.position).magnitude < triggerCollider.radius)
+        if ((player.transform.position - transform.position).magnitude < triggerCollider.radius)
         {
             currentState = State.Aggressive;
         }
@@ -107,7 +107,7 @@ public class ShuupController : MonoBehaviour
                 anim.SetFloat("Speed", 0.5f);
                 rb.MovePosition(transform.position + randomDirection * wanderSpeed * Time.deltaTime);
             }
-            else 
+            else
             {
                 anim.SetBool("Running", false);
                 anim.SetFloat("Speed", 0.5f);
@@ -115,6 +115,12 @@ public class ShuupController : MonoBehaviour
 
             newDirectionCountdown -= 1.0f;
 
+            var grass = Terrain.activeTerrain.GetComponent<GrassController>();
+            var count = 0;
+            count += grass.CutCounted(transform.position, 2f);
+            count += grass.CutCounted(transform.position, 3f);
+
+            if (WorldController.instance != null) WorldController.instance.SheepCut(count);
         }
         else if (currentState == State.Attacking)
         {
@@ -144,7 +150,8 @@ public class ShuupController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == player) {
+        if (other.gameObject == player)
+        {
             currentState = State.Aggressive;
         }
     }
@@ -174,7 +181,7 @@ public class ShuupController : MonoBehaviour
                 if (randomBloodPrefab)
                     Instantiate(randomBloodPrefab, this.transform.position, Quaternion.LookRotation(other.contacts[0].normal));
 
-                       
+
                 // knockback 
                 Vector3 velocityChange = -(player.transform.position - transform.position);
                 rb.MovePosition(transform.position + velocityChange * 1.0f);
@@ -188,7 +195,7 @@ public class ShuupController : MonoBehaviour
         }
     }
 
-    GameObject SelectRandomBloodPrefab( )
+    GameObject SelectRandomBloodPrefab()
     {
         if (bloodPrefabs.Length > 0)
         {
