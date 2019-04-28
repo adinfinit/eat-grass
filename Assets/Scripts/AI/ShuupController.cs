@@ -117,7 +117,6 @@ public class ShuupController : MonoBehaviour
 
             var grass = Terrain.activeTerrain.GetComponent<GrassController>();
             var count = 0;
-            count += grass.CutCounted(transform.position, 2f);
             count += grass.CutCounted(transform.position, 3f);
 
             if (WorldController.instance != null) WorldController.instance.SheepCut(count);
