@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public float CurrentHealth = 200f;
     public float InvulnerableTime = 0.5f;  // time between taking damage
     private float InvulnerableTimer= 0f;
+    private HealthBar healtbar;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         cameraDirection = Quaternion.Euler(0, 45, 0);
 
         weaponControllers = GetComponentsInChildren<WeaponController>();
+        healtbar = GetComponentInChildren<HealthBar>();
     }
 
     // Update is called once per frame
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move( (cameraDirection * moveDirection) * Time.deltaTime * speed);
 
+        /*
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Terrain.activeTerrain.GetComponent<Collider>().Raycast(ray, out hit, Mathf.Infinity))
@@ -67,15 +70,17 @@ public class PlayerController : MonoBehaviour
             position.y = 0;
             transform.rotation = Quaternion.LookRotation( hitAt - position );
         }
+        */
 
 
         // Attack animation
         if (Input.GetKeyDown (KeyCode.Space)) { 
             foreach (WeaponController wc in weaponControllers) {
-                wc.StartAttack();
+                wc.StartAreaSlash();
             }
         }
 
+        /*
         if (Input.GetKeyDown(KeyCode.R))
         {
             foreach (WeaponController wc in weaponControllers)
@@ -83,7 +88,9 @@ public class PlayerController : MonoBehaviour
                 wc.StartAreaSlash();
             }
         }
+        */
 
+        healtbar.transform.localScale = new Vector3(2 * (Mathf.Clamp(CurrentHealth, 0f, MaxHealth) / MaxHealth), 0.2f, 0f);
 
         // constrain elevation
         transform.position = new Vector3 (transform.position.x, 1f, transform.position.z);

@@ -215,22 +215,7 @@ PrefabInstance:
     - target: {fileID: 6566744317603817835, guid: a8bd166b365d141a99143171547c7ef1,
         type: 3}
       propertyPath: m_Name
-      value: Shuup Variant (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6566744317603821202, guid: a8bd166b365d141a99143171547c7ef1,
-        type: 3}
-      propertyPath: bloodPrefabs.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6566744317603821202, guid: a8bd166b365d141a99143171547c7ef1,
-        type: 3}
-      propertyPath: knockbackSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6566744317603817837, guid: a8bd166b365d141a99143171547c7ef1,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 84
+      value: Shuup Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6566744317603817836, guid: a8bd166b365d141a99143171547c7ef1,
         type: 3}
@@ -291,6 +276,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566744317603817832, guid: a8bd166b365d141a99143171547c7ef1,
+        type: 3}
+      propertyPath: m_Radius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566744317603821202, guid: a8bd166b365d141a99143171547c7ef1,
+        type: 3}
+      propertyPath: bloodPrefabs.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566744317603821202, guid: a8bd166b365d141a99143171547c7ef1,
+        type: 3}
+      propertyPath: knockbackSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566744317603817837, guid: a8bd166b365d141a99143171547c7ef1,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 84
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8bd166b365d141a99143171547c7ef1, type: 3}
