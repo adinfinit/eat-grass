@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 1621197132}
   - component: {fileID: 1621197131}
   - component: {fileID: 1621197134}
+  - component: {fileID: 1621197135}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -631,7 +632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621197130}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -125, y: 0, z: -125}
+  m_LocalPosition: {x: -50, y: 0, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -649,6 +650,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cbb3df5c0e0ee94880c21da0738a692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1621197135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621197130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1460b318808ec425dbd5f49e07aa2b63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Interval: 3
 --- !u!1 &1644351528
 GameObject:
   m_ObjectHideFlags: 0
