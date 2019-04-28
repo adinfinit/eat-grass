@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GrassController : MonoBehaviour
 {
-    const int maxDensity = 64;
+    const int maxDensity = 128;
 
     void Awake()
     {
@@ -119,6 +119,9 @@ public class GrassController : MonoBehaviour
         // cache bounds
         var wn = cut0.GetLength(0);
         var hn = cut0.GetLength(1);
+
+        wr = Mathf.Floor(radius * detailScale.x);
+        hr = Mathf.Floor(radius * detailScale.z);
 
         // calculate inverse ellipse dimensions
         var wrinv = 1 / wr;

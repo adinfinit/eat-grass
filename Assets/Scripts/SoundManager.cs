@@ -74,6 +74,7 @@ public class SoundManager : MonoBehaviour
             GameObject soundGameObject = new GameObject("Sound Effect");
             soundGameObject.transform.parent = transform;
             AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
+            soundGameObject.AddComponent<AudioSourceAutoDestroy>();
             audioSource.PlayOneShot(sfx);
         }
     }

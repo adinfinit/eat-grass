@@ -9494,7 +9494,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 0
     randomizeRotationDirection: 1
-    maxNumParticles: 1000
+    maxNumParticles: 5000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -9516,7 +9516,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0.8982296
+          value: 0.66371727
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -9640,7 +9640,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.1
+      value: 1
       mode: 0
       spread: 0
       speed:
@@ -9759,7 +9759,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 80
+      scalar: 2000
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10382,7 +10382,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
+      scalar: 4
       minScalar: -2
       maxCurve:
         serializedVersion: 2
@@ -10417,7 +10417,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
+      scalar: 4
       minScalar: -2
       maxCurve:
         serializedVersion: 2
@@ -10452,7 +10452,7 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
+      scalar: 7
       minScalar: 5
       maxCurve:
         serializedVersion: 2

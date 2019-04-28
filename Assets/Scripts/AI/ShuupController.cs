@@ -157,24 +157,40 @@ public class ShuupController : MonoBehaviour
 
             if (Time.time - knockBackTime > 0.1f)
             {
+                // damage
+                this.health -= other.gameObject.GetComponent<WeaponInfo>().weaponController.damage;
+
+                // sound
                 EventManager.TriggerEvent("SheepBaa");
-                Instantiate(SelectRandomBloodPrefab(), this.transform.position, Quaternion.LookRotation(other.contacts[0].normal));
-                Vector3 velocityChange = -(player.transform.position - transform.position) ;
+
+                // blood spawn
+                GameObject randomBloodPrefab = SelectRandomBloodPrefab();
+                if (randomBloodPrefab)
+                    Instantiate(randomBloodPrefab, this.transform.position, Quaternion.LookRotation(other.contacts[0].normal));
+
+                       
+                // knockback 
+                Vector3 velocityChange = -(player.transform.position - transform.position);
                 rb.MovePosition(transform.position + velocityChange * 1.0f);
 
                 velocityChange.y = 0.0f;
-                rb.velocity = velocityChange * knockbackSpeed ;
+                rb.velocity = velocityChange * knockbackSpeed;
                 knockBackTime = Time.time;
                 currentState = State.Knockback;
 
-                this.health -= other.gameObject.GetComponent<WeaponInfo>().damage;
-            }       
+            }
         }
     }
 
     GameObject SelectRandomBloodPrefab( )
     {
-        int index = Random.Range(0, bloodPrefabs.Length - 1);
-        return bloodPrefabs[index];
+        if (bloodPrefabs.Length > 0)
+        {
+            int index = Random.Range(0, bloodPrefabs.Length - 1);
+            return bloodPrefabs[index];
+        }
+
+        return null;
+
     }
 }

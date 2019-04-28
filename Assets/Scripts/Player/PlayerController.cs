@@ -55,7 +55,19 @@ public class PlayerController : MonoBehaviour
             moveDirection = dashMultiplier * dashDir;
         }
 
-        characterController.Move((cameraDirection * moveDirection) * Time.deltaTime * speed);
+        characterController.Move( (cameraDirection * moveDirection) * Time.deltaTime * speed);
+
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Terrain.activeTerrain.GetComponent<Collider>().Raycast(ray, out hit, Mathf.Infinity))
+        {
+            var hitAt = hit.point;
+            var position = transform.position;
+            hitAt.y = 0;
+            position.y = 0;
+            transform.rotation = Quaternion.LookRotation( hitAt - position );
+        }
+
 
         // Attack animation
         if (Input.GetKeyDown (KeyCode.Space)) { 
@@ -63,6 +75,15 @@ public class PlayerController : MonoBehaviour
                 wc.StartAttack();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            foreach (WeaponController wc in weaponControllers)
+            {
+                wc.StartAreaSlash();
+            }
+        }
+
 
         // constrain elevation
         transform.position = new Vector3 (transform.position.x, 1f, transform.position.z);
