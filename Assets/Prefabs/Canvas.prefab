@@ -213,8 +213,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acfb59d86bced488494c904e6e49224f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScore: {fileID: 6632738404010446839}
-  sheepScore: {fileID: 6632738404306330575}
+  InitialScore: 1000000
+  playerScoreText: {fileID: 6632738404010446839}
+  sheepScoreText: {fileID: 6632738404306330575}
+  playerScore: 0
+  sheepScore: 0
 --- !u!223 &6632738403338340648
 Canvas:
   m_ObjectHideFlags: 0
