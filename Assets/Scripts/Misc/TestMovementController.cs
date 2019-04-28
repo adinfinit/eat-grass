@@ -30,8 +30,10 @@ public class TestMovementController : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             var mower = terrain.GetComponent<GrassController>();
-            mower.Cut(transform.position, 6f);
-            mower.Cut(transform.position, 3f);
+            //mower.Cut(transform.position, 6f);
+            //mower.Cut(transform.position, 3f);
+            mower.CutArc(transform.position, 8f, transform.forward, 60f);
+            mower.CutArc(transform.position, 6f, transform.forward, 30f);
         }
 
         if (Input.GetButtonDown("Fire2"))
@@ -46,6 +48,8 @@ public class TestMovementController : MonoBehaviour
     {
         if (direction.magnitude > 0.05f)
         {
+            rb.transform.rotation = Quaternion.LookRotation(direction);
+
             var velocity = rb.velocity;
             velocity.x = direction.x * maxSpeed;
             velocity.z = direction.z * maxSpeed;
