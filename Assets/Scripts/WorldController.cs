@@ -52,6 +52,10 @@ public class WorldController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetButton("Cancel")) {
+            Application.Quit();
+        }
+
         playerScoreText.text = playerScore.ToString();
         sheepScoreText.text = sheepScore.ToString();
     }
