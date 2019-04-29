@@ -216,8 +216,10 @@ MonoBehaviour:
   InitialScore: 1000000
   playerScoreText: {fileID: 6632738404010446839}
   sheepScoreText: {fileID: 6632738404306330575}
+  messageText: {fileID: 6632738404468316306}
   playerScore: 0
   sheepScore: 0
+  gameFinished: 0
 --- !u!223 &6632738403338340648
 Canvas:
   m_ObjectHideFlags: 0
