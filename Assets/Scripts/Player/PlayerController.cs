@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
 
         moveDirection = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        if(moveDirection.magnitude > 1) moveDirection.Normalize();
 
         if (currentlyDashing)
         {
@@ -65,42 +66,23 @@ public class PlayerController : MonoBehaviour
 
         characterController.Move((cameraDirection * moveDirection) * Time.deltaTime * speed);
 
-        /*
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Terrain.activeTerrain.GetComponent<Collider>().Raycast(ray, out hit, Mathf.Infinity))
-        {
-            var hitAt = hit.point;
-            var position = transform.position;
-            hitAt.y = 0;
-            position.y = 0;
-            transform.rotation = Quaternion.LookRotation( hitAt - position );
-        }
-        */
-
 
         // Attack animation
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3") || Input.GetButtonDown("Jump"))
         {
             foreach (WeaponController wc in weaponControllers)
             {
                 wc.StartAreaSlash();
             }
         }
-
-        /*
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            foreach (WeaponController wc in weaponControllers)
-            {
-                wc.StartAreaSlash();
-            }
-        }
-        */
 
         // healtbar.transform.localScale = new Vector3(2 * (Mathf.Clamp(CurrentHealth, 0f, MaxHealth) / MaxHealth), 0.2f, 0f);
 
-        skel.Skeleton.ScaleX = (moveDirection.x < 0)  ? 1 : -1;
+        if(moveDirection.x < -0.1f) {
+            skel.Skeleton.ScaleX = 1;
+        } else if(moveDirection.x > 0.1f) {
+            skel.Skeleton.ScaleX = -1;
+        }
 
         // constrain elevation
         transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
